@@ -1,0 +1,4 @@
+npm install
+npm i --save-dev @types/uuid
+npm i --save-dev @types/better-sqlite3
+npm i --save-dev @types/express
