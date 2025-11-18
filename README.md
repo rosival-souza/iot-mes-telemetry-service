@@ -90,8 +90,7 @@ A implementação entregue atende ao que foi especificado:
 1. Subir broker (Docker: eclipse-mosquitto).  
 2. Iniciar Collector (`npm run start`) — subscreve tópicos.  
 3. Iniciar Sensor emulator — publica eventos.  
-4. Usar `curl` para consultar `/machines/M01/oee` (`curl "http://localhost:3000/machines/M01/oee?from=0&to=$(Get-Date -UFormat %s)000"
-`).  
+4. Usar `curl` para consultar `/machines/M01/oee` (`curl http://localhost:3000/machines/M01/oee`).  
 5. Gravar tela mostrando logs do collector, publicação de eventos e resposta do endpoint.
 
 ---
