@@ -93,9 +93,3 @@ A implementação entregue atende ao que foi especificado:
 4. Usar `curl` para consultar `/machines/M01/oee` (`curl http://localhost:3000/machines/M01/oee`).  
 5. Gravar tela mostrando logs do collector, publicação de eventos e resposta do endpoint.
 
----
-
-**Anexos (código e instruções de execução) estão no repositório e serão entregues junto ao relatório.**
-
-(Fim do relatório — 4 páginas quando formatado com o template SBC.)
-
