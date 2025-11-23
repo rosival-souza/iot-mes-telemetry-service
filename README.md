@@ -1,4 +1,4 @@
-# Especificação e Implementação — Sistema MES Modernizado (Caso SKA) 
+# Especificação e Implementação - Sistema MES Modernizado (Caso SKA) 
 # IOT-MES-TELEMETRY-SERVICE
 
 **Autores:** <br />
@@ -7,7 +7,7 @@
  - Giulia Mendes <br />
  - Tiago Zardin <br />
 
-**Disciplina:** Engenharia de Software — Pós‑Graduação UNISINOS  
+**Disciplina:** Engenharia de Software - Pós‑Graduação UNISINOS  
 
 ---
 
@@ -25,19 +25,19 @@ Requisitos funcionais principais:
 
 Requisitos não‑funcionais:
 - Escalabilidade horizontal (vários collectors assinando tópicos diferentes ou em cluster).
-- Robustez — tolerância a desconexões de sensores.
+- Robustez - tolerância a desconexões de sensores.
 - Segurança: transporte via TLS opcional no broker; autenticação da API via token simples (implementação demo).
-- Conformidade LGPD: minimização de dados pessoais (coletamos apenas identificadores de máquina — sem identificadores de operadores neste protótipo).
+- Conformidade LGPD: minimização de dados pessoais (coletamos apenas identificadores de máquina - sem identificadores de operadores neste protótipo).
 
 ## 3. Arquitetura proposta
 **Padrão arquitetural:** Microserviços com *Broker* (mensageria) + APIs REST.
 
 Componentes:
-- **Dispositivo IoT / Emulador** — publica eventos via MQTT.
-- **Broker MQTT** (ex.: Mosquitto, EMQX) — middleware para marshaling simples (mensagens JSON).
-- **Collector Service** — microserviço (Node.js/TypeScript) que subscreve tópicos MQTT, valida e persiste eventos em base (SQLite para demo; cloud DB para produção).
-- **API Gateway / REST** — mesmo Collector expõe REST para consultas e integrações com módulo de análise.
-- **Dashboard / Analytics** — componente de leitura que consome a API para visualização.
+- **Dispositivo IoT / Emulador** - publica eventos via MQTT.
+- **Broker MQTT** (ex.: Mosquitto, EMQX) - middleware para marshaling simples (mensagens JSON).
+- **Collector Service** - microserviço (Node.js/TypeScript) que subscreve tópicos MQTT, valida e persiste eventos em base (SQLite para demo; cloud DB para produção).
+- **API Gateway / REST** - mesmo Collector expõe REST para consultas e integrações com módulo de análise.
+- **Dashboard / Analytics** - componente de leitura que consome a API para visualização.
 
 **Justificativa:** Broker MQTT é amplamente usado em IoT pela leveza e suporte a QoS; microserviços permitem modularidade e escalabilidade; REST é facilmente integrado a dashboards e outros módulos.
 
@@ -60,9 +60,9 @@ Para a funcionalidade implementada (inserção de eventos e leitura de métricas
 Caso se estenda o sistema para operações concorrentes que atualizem um recurso único (ex.: mudança de estado global da linha ou alocação exclusiva de uma máquina), recomenda‑se uso de locks distribuídos via **Redis (Redlock)** ou serviços de coordenação como **ZooKeeper/etcd**.
 
 ## 7. Especificação da API (endpoints principais)
-- `POST /events` — (opcional) ingestão direta via HTTP (JSON).
-- `GET /machines/{id}/oee?from=...&to=...` — retorna OEE simplificado e métricas (availability, performance, quality) no período.
-- `GET /machines/{id}/events?limit=100` — eventos recentes.
+- `POST /events` - (opcional) ingestão direta via HTTP (JSON).
+- `GET /machines/{id}/oee?from=...&to=...` - retorna OEE simplificado e métricas (availability, performance, quality) no período.
+- `GET /machines/{id}/events?limit=100` - eventos recentes.
 
 Formato das respostas: JSON, paginadas quando aplicável.
 
@@ -86,10 +86,10 @@ A implementação entregue atende ao que foi especificado:
 - SQLite: simplicidade para entrega e avaliação; em produção migrar para timeseries DB (InfluxDB) ou cloud SQL.
 - REST + Pub/Sub: combinações comprovadas para MES distribuídos.
 
-## 11. Como testar / demonstrar (video)
+## 11. Como testar
 1. Subir broker (Docker: eclipse-mosquitto).  
-2. Iniciar Collector (`npm run start`) — subscreve tópicos.  
-3. Iniciar Sensor emulator — publica eventos.  
+2. Iniciar Collector (`npm run start`) - subscreve tópicos.  
+3. Iniciar Sensor emulator - publica eventos.  
 4. Usar `curl` para consultar `/machines/M01/oee` (`curl http://localhost:3000/machines/M01/oee`).  
 5. Gravar tela mostrando logs do collector, publicação de eventos e resposta do endpoint.
 
